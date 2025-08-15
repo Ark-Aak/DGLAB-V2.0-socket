@@ -49,7 +49,7 @@ while qrRaw == "":
         logging.info("识别成功，二维码内容：" + qrRaw)
         break
 
-store = local_data(clientId=qrRaw[82:])
+store = local_data(clientId=qrRaw[81:])
 store.limitA = int(config["Channel_A_limit"])
 store.limitB = int(config["Channel_B_limit"])
 
