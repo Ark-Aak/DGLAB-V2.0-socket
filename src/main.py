@@ -9,6 +9,7 @@ import time
 from rich.table import Table
 from rich.live import Live
 from utils import find_qr_code
+import re
 
 with open("./config.yaml") as stream:
     try:
@@ -49,10 +50,12 @@ while qrRaw == "":
         logging.info("识别成功，二维码内容：" + qrRaw)
         break
 
-store = local_data(clientId=qrRaw[81:])
+match = re.search(r":(\d+)/([0-9a-fA-F-]+)", qrRaw)
+uuid_str = match.group(2) if match else None
+
+store = local_data(clientId=uuid_str)
 store.limitA = int(config["Channel_A_limit"])
 store.limitB = int(config["Channel_B_limit"])
-
 
 def on_message(ws, message_raw):
     logger.debug(f"Received message: {message_raw}")
