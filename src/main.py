@@ -82,7 +82,7 @@ def on_message(ws, message_raw):
         break_(ws, message)
     elif message.type_ == "error":
         error(ws, message)
-    response(ws, "feedback-0", store)
+    # response(ws, "feedback-0", store)
 
 
 def on_error(ws, error):
